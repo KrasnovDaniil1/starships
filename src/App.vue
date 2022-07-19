@@ -20,30 +20,39 @@ export default {
 </script>
 
 <style lang="scss">
-// .app {
-//     max-width: 100vw;
-//     overflow: hidden;
-// }
-// :root {
-//     --font-first: 'Playfair Display';
-//     --size-first: max(22px, 1.3vw);
-//     --size-second: max(25px, 1.5vw);
-//     --size-third: max(40px, 2.2vw);
-// }
-// @media screen and (max-width: 920px) {
-//     :root {
-//         --size-third: 32px;
-//     }
-// }
-// @media screen and (max-width: 420px) {
-//     :root {
-//         --size-second: 22px;
-//         --size-first: 20px;
-//     }
-// }
+:root {
+    --size-first: 25px;
+    --size-second: 40px;
+    --size-third: 70px;
+    --color-first: #fff;
+    --color-second: #e2f063;
+}
+@media screen and (max-width: 920px) {
+    :root {
+        --size-first: 23px;
+        --size-second: 35px;
+        --size-third: 50px;
+    }
+}
+@media screen and (max-width: 420px) {
+    :root {
+        --size-first: 22px;
+        --size-second: 30px;
+        --size-third: 40px;
+    }
+}
+
 .app {
     background: #1e1e1e;
     padding: 0 80px;
+    min-height: 100vh;
+}
+.title {
+    margin-bottom: 60px;
+    font-family: 'Gilroy';
+    font-size: var(--size-third);
+    font-weight: 500;
+    color: #e2f063;
 }
 body,
 head {
@@ -55,7 +64,6 @@ head {
     margin: 0;
     box-sizing: border-box;
     font-size: 100%;
-    font: inherit;
     line-height: 1;
     color: inherit;
 }

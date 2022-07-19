@@ -1,5 +1,15 @@
 <template>
-    <div class="home"></div>
+    <section class="home">
+        <h1 class="title">Welcome to StarDB</h1>
+        <div class="home-text">
+            Api взятое с сайта - SWAPI. На этом сайте реализовано только api -
+            Starships. Во вкладке Search можно найти корабель по названию
+            модели. Во вкладке Starships можно просмотреть все корабли
+            используемые в звёздных войнах и отсортировать их по модели и
+            названию корабля.
+        </div>
+        <div class="decor"></div>
+    </section>
 </template>
 <script>
 export default {
@@ -7,3 +17,24 @@ export default {
     setup() {},
 };
 </script>
+<style lang="scss" scoped>
+.home {
+    position: relative;
+    .home-text {
+        font-size: var(--size-second);
+        font-family: 'Gilroy';
+        line-height: 1.5;
+        color: var(--color-first);
+        margin-right: 230px;
+    }
+    .decor {
+        position: absolute;
+        top: 40px;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #8b39b2 0%, #e2f063 100%);
+        opacity: 0.6;
+        filter: blur(200px);
+    }
+}
+</style>

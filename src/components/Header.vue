@@ -18,20 +18,24 @@ export default {
     padding: 40px 0 156px 0;
     display: flex;
     justify-content: space-between;
-    color: #fff;
+    color: var(--color-first);
     .logo {
         font-family: 'Open Sans';
-        font-size: 40px;
+        font-size: var(--size-second);
         font-weight: 600;
     }
     .nav-router {
         margin-top: auto;
         font-family: 'Gilroy';
-        font-weight: 500;
-        font-size: 24px;
+        font-weight: 400;
+        font-size: var(--size-first);
         .nav {
             margin-left: 40px;
         }
+    }
+    .router-link-active {
+        color: var(--color-second);
+        text-decoration: underline;
     }
 }
 </style>
