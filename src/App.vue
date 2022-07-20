@@ -26,6 +26,7 @@ export default {
     --size-third: 70px;
     --color-first: #fff;
     --color-second: #e2f063;
+    --color-third: #1e1e1e;
 }
 @media screen and (max-width: 920px) {
     :root {
@@ -34,7 +35,7 @@ export default {
         --size-third: 50px;
     }
 }
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 460px) {
     :root {
         --size-first: 22px;
         --size-second: 30px;
@@ -43,12 +44,16 @@ export default {
 }
 
 .app {
-    background: #1e1e1e;
-    padding: 0 80px;
+    position: relative;
+    padding: 0 clamp(10px, 5vw, 80px);
+    padding-bottom: 100px;
+    max-width: 100vw;
     min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--color-third);
 }
 .title {
-    margin-bottom: 60px;
+    margin-bottom: clamp(20px, 4vw, 60px);
     font-family: 'Gilroy';
     font-size: var(--size-third);
     font-weight: 500;
@@ -112,13 +117,12 @@ textarea {
 }
 ::-webkit-scrollbar {
     /*блок скролла*/
-    background: #f2f2f2;
+    background: var(--color-third);
     width: 5px;
 }
 ::-webkit-scrollbar-thumb {
     /*ползунок скролла*/
-    background: #000;
-    border-radius: 10px;
+    background: var(--color-second);
 }
 @font-face {
     font-family: 'Gilroy';

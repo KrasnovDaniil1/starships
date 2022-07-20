@@ -16,6 +16,11 @@ const routes = [
         name: 'starships',
         component: () => import('../views/Starships.vue'),
     },
+    {
+        path: '/starships/:id',
+        name: 'detailstarship',
+        component: () => import('../views/DetailStarship.vue'),
+    },
 ];
 
 const router = createRouter({

@@ -12,29 +12,42 @@
     </section>
 </template>
 <script>
+import { ref } from 'vue';
 export default {
     name: 'Home',
-    setup() {},
+    setup() {
+        const mountAnim = ref(true);
+
+        return { mountAnim };
+    },
 };
 </script>
 <style lang="scss" scoped>
 .home {
     position: relative;
     .home-text {
-        font-size: var(--size-second);
+        width: 85%;
         font-family: 'Gilroy';
+        font-size: var(--size-second);
         line-height: 1.5;
         color: var(--color-first);
-        margin-right: 230px;
     }
     .decor {
         position: absolute;
-        top: 40px;
+        top: 0;
         width: 100%;
         height: 100%;
         background: linear-gradient(90deg, #8b39b2 0%, #e2f063 100%);
         opacity: 0.6;
         filter: blur(200px);
+    }
+}
+@media screen and (max-width: 920px) {
+    .home {
+        .home-text {
+            margin-right: 0;
+            width: 100%;
+        }
     }
 }
 </style>
