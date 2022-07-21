@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/9" class="card">
+    <router-link to="starships/9" class="card">
         <img
             class="image"
             src="https://starwars-visualguide.com/assets/img/starships/9.jpg"

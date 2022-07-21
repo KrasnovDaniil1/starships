@@ -1,6 +1,6 @@
 <template>
     <div class="starships">
-        <h1 class="title">Welcome to StarDB</h1>
+        <h1 class="title">Straships</h1>
         <div class="sort-block">
             <span class="sort">Sort by:</span>
             <span

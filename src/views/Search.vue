@@ -1,5 +1,7 @@
 <template>
     <div class="search">
+        <h1 class="title">Search</h1>
+
         <label class="search-block">
             <input
                 type="text"
