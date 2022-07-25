@@ -33,7 +33,6 @@ export default {
             required: true,
         },
     },
-    setup() {},
 };
 </script>
 <style lang="scss" scoped>

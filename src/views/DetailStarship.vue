@@ -46,7 +46,6 @@
 <script>
 export default {
     name: 'DetailStarship',
-    setup() {},
 };
 </script>
 <style lang="scss" scoped>

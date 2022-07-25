@@ -7,23 +7,48 @@
                 type="text"
                 class="search-text"
                 placeholder="Название корабля ..."
+                v-model="starshipName"
+                @keydown.enter="searchStrashipByName"
             />
-            <button class="search-btn">Поиск</button>
+            <button class="search-btn" @click="searchStrashipByName">
+                Поиск
+            </button>
         </label>
         <div class="card-block">
-            <StarshipCard v-for="index in 9" :key="index" />
+            <StarshipCard v-for="index in starships" :key="index" />
         </div>
     </div>
 </template>
 <script>
 import StarshipCard from '../components/StarshipCard.vue';
-
+import { ref } from 'vue';
+// import { searchStarships } from '../app.js';
 export default {
     name: 'Search',
     components: {
         StarshipCard,
     },
-    setup() {},
+    setup() {
+        const starshipName = '';
+        const starships = ref([]);
+        const searchStrashipByName = () => {
+            const api = 'https://swapi.dev/api/starships/';
+            fetch(`${api}?search=${starshipName.value}`).then(
+                async (response) => {
+                    const data = await response.json();
+                    starships.value = data;
+                    console.log('app', starships.value);
+                }
+            );
+        };
+
+        return {
+            starshipName,
+            starships,
+            searchStrashipByName,
+            // searchStarships,
+        };
+    },
 };
 </script>
 <style lang="scss" scoped>

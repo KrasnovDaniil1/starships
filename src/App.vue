@@ -116,34 +116,34 @@ textarea {
     }
 }
 ::-webkit-scrollbar {
-    /*блок скролла*/
     background: var(--color-third);
     width: 5px;
 }
 ::-webkit-scrollbar-thumb {
-    /*ползунок скролла*/
     background: var(--color-second);
 }
 @font-face {
     font-family: 'Gilroy';
-    src: url('./font/Gilroy-Regular.eot');
+    src: url('./assets/font/Gilroy-Regular.eot');
     src: local('Gilroy Regular'), local('Gilroy-Regular'),
-        url('./font/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
-        url('./font/Gilroy-Regular.woff2') format('woff2'),
-        url('./font/Gilroy-Regular.woff') format('woff'),
-        url('./font/Gilroy-Regular.ttf') format('truetype');
+        url('./assets/font/Gilroy-Regular.eot?#iefix')
+            format('embedded-opentype'),
+        url('./assets/font/Gilroy-Regular.woff2') format('woff2'),
+        url('./assets/font/Gilroy-Regular.woff') format('woff'),
+        url('./assets/font/Gilroy-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Gilroy';
-    src: url('./font/Gilroy-Medium.eot');
+    src: url('./assets/font/Gilroy-Medium.eot');
     src: local('Gilroy Medium'), local('Gilroy-Medium'),
-        url('./font/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
-        url('./font/Gilroy-Medium.woff2') format('woff2'),
-        url('./font/Gilroy-Medium.woff') format('woff'),
-        url('./font/Gilroy-Medium.ttf') format('truetype');
+        url('./assets/font/Gilroy-Medium.eot?#iefix')
+            format('embedded-opentype'),
+        url('./assets/font/Gilroy-Medium.woff2') format('woff2'),
+        url('./assets/font/Gilroy-Medium.woff') format('woff'),
+        url('./assets/font/Gilroy-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }

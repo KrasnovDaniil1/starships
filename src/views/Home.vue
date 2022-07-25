@@ -12,14 +12,8 @@
     </section>
 </template>
 <script>
-import { ref } from 'vue';
 export default {
     name: 'Home',
-    setup() {
-        const mountAnim = ref(true);
-
-        return { mountAnim };
-    },
 };
 </script>
 <style lang="scss" scoped>

@@ -33,10 +33,15 @@
 import { ref } from 'vue';
 export default {
     name: 'Header',
-    setup() {
-        const burgerActive = ref(true);
-        return { burgerActive };
+    data() {
+        return {
+            burgerActive: ref(true),
+        };
     },
+    // setup() {
+    //     const burgerActive = ref(true);
+    //     return { burgerActive };
+    // },
 };
 </script>
 <style lang="scss" scoped>
@@ -55,7 +60,7 @@ export default {
         font-family: 'Gilroy';
         font-weight: 400;
         font-size: var(--size-first);
-        transition: all 0.5s cubic-bezier(.57,.17,.42,.83);
+        transition: all 0.5s cubic-bezier(0.57, 0.17, 0.42, 0.83);
         .nav {
             margin-left: 40px;
         }
