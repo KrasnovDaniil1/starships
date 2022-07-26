@@ -15,38 +15,42 @@
             </button>
         </label>
         <div class="card-block">
-            <StarshipCard v-for="index in starships" :key="index" />
+            <StarshipCard
+                v-for="(starship, index) in allStarships.results"
+                :id="starship.url.split('/')[5]"
+                :cost="starship.cost_in_credits"
+                :name="starship.name"
+                :key="index"
+            />
         </div>
+        <template v-if="Math.ceil(allStarships.count)">
+            <Pagination :pages="Math.ceil(allStarships.count / 10)" />
+        </template>
     </div>
 </template>
 <script>
 import StarshipCard from '../components/StarshipCard.vue';
+import Pagination from '../components/Pagination.vue';
+
 import { ref } from 'vue';
-// import { searchStarships } from '../app.js';
+import { SearchStarships } from '../app.js';
 export default {
     name: 'Search',
     components: {
         StarshipCard,
+        Pagination,
     },
     setup() {
-        const starshipName = '';
-        const starships = ref([]);
-        const searchStrashipByName = () => {
-            const api = 'https://swapi.dev/api/starships/';
-            fetch(`${api}?search=${starshipName.value}`).then(
-                async (response) => {
-                    const data = await response.json();
-                    starships.value = data;
-                    console.log('app', starships.value);
-                }
-            );
+        const starshipName = ref('');
+        const allStarships = ref({});
+        const searchStrashipByName = async () => {
+            allStarships.value = await SearchStarships(starshipName.value);
         };
 
         return {
             starshipName,
-            starships,
+            allStarships,
             searchStrashipByName,
-            // searchStarships,
         };
     },
 };

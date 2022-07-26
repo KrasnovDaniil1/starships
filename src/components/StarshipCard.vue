@@ -1,22 +1,30 @@
 <template>
     <router-link to="starships/9" class="card">
         <img
+            v-if="!imageError"
             class="image"
-            src="https://starwars-visualguide.com/assets/img/starships/9.jpg"
-            alt=""
+            :src="`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`"
+            alt="Корабль"
+            @error="imageError = true"
         />
-
+        <img
+            v-else
+            class="image"
+            src="https://static3.depositphotos.com/1007959/232/i/600/depositphotos_2328703-stock-photo-nothing-road-sign-with-dramatic.jpg"
+            alt="Корабль"
+        />
         <div class="text-block">
             <span class="text-title">Cost:</span>
-            <h1 class="text-value">$2.000.000.000</h1>
+            <h1 class="text-value">{{ cost }}</h1>
         </div>
         <div class="text-block">
             <span class="text-title">Name:</span>
-            <h1 class="text-value">Millennium Falcon</h1>
+            <h1 class="text-value">{{ name }}</h1>
         </div>
     </router-link>
 </template>
 <script>
+import { ref } from 'vue';
 export default {
     name: 'StarshipCard',
     props: {
@@ -32,6 +40,12 @@ export default {
             type: String,
             required: true,
         },
+    },
+    setup() {
+        const imageError = ref(false);
+        return {
+            imageError,
+        };
     },
 };
 </script>
