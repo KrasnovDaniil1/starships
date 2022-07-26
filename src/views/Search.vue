@@ -1,7 +1,6 @@
 <template>
     <div class="search">
         <h1 class="title">Search</h1>
-
         <label class="search-block">
             <input
                 type="text"
@@ -14,6 +13,10 @@
                 Поиск
             </button>
         </label>
+
+        <h1 class="emptiness-page" v-if="!Math.ceil(allStarships.count)">
+            Пока здесь пусто...
+        </h1>
         <div class="card-block">
             <StarshipCard
                 v-for="(starship, index) in allStarships.results"
@@ -24,13 +27,19 @@
             />
         </div>
         <template v-if="Math.ceil(allStarships.count)">
-            <Pagination :pages="Math.ceil(allStarships.count / 10)" />
+            <Pagination
+                @selectPage="(i) => changePage(i)"
+                :pages="Math.ceil(allStarships.count / 10)"
+                :activePage="page"
+            />
         </template>
+        <Loader v-if="loaderActive" />
     </div>
 </template>
 <script>
 import StarshipCard from '../components/StarshipCard.vue';
 import Pagination from '../components/Pagination.vue';
+import Loader from '../components/Loader.vue';
 
 import { ref } from 'vue';
 import { SearchStarships } from '../app.js';
@@ -39,17 +48,32 @@ export default {
     components: {
         StarshipCard,
         Pagination,
+        Loader,
     },
     setup() {
         const starshipName = ref('');
-        const allStarships = ref({});
+        const allStarships = ref([]);
+        const page = ref(1);
+        const loaderActive = ref(false);
+        const changePage = (selectPage) => {
+            page.value = selectPage;
+            searchStrashipByName();
+        };
         const searchStrashipByName = async () => {
-            allStarships.value = await SearchStarships(starshipName.value);
+            loaderActive.value = true;
+            allStarships.value = await SearchStarships(
+                starshipName.value,
+                page.value
+            );
+            loaderActive.value = false;
         };
 
         return {
             starshipName,
             allStarships,
+            page,
+            loaderActive,
+            changePage,
             searchStrashipByName,
         };
     },
@@ -57,6 +81,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .search {
+    font-family: 'Gilroy';
     .search-block {
         margin: 0 auto;
         display: flex;
@@ -73,6 +98,12 @@ export default {
             margin-left: clamp(10px, 3vw, 50px);
             border-radius: 10px;
         }
+    }
+    .emptiness-page {
+        font-size: var(--size-second);
+        color: var(--color-first);
+        margin-top: 50%;
+        text-align: center;
     }
     .card-block {
         margin-top: clamp(30px, 3vw, 50px);

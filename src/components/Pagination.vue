@@ -1,6 +1,12 @@
 <template>
     <div class="pagination">
-        <button class="page" v-for="index in pages" :key="index">
+        <button
+            @click="$emit('selectPage', index)"
+            class="page"
+            :class="{ 'page-active': activePage == index }"
+            v-for="index in pages"
+            :key="index"
+        >
             {{ index }}
         </button>
     </div>
@@ -10,6 +16,10 @@ export default {
     name: 'Pagination',
     props: {
         pages: {
+            type: Number,
+            required: true,
+        },
+        activePage: {
             type: Number,
             required: true,
         },
@@ -27,6 +37,9 @@ export default {
         padding: 10px 15px;
         margin: 20px;
         border-radius: 4px;
+    }
+    .page-active {
+        background: var(--color-first);
     }
 }
 </style>
