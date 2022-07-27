@@ -7,11 +7,9 @@
                 class="search-text"
                 placeholder="Название корабля ..."
                 v-model="starshipName"
-                @keydown.enter="searchStrashipByName"
+                @keydown.enter="newSearch()"
             />
-            <button class="search-btn" @click="searchStrashipByName">
-                Поиск
-            </button>
+            <button class="search-btn" @click="newSearch()">Поиск</button>
         </label>
 
         <h1 class="emptiness-page" v-if="!Math.ceil(allStarships.count)">
@@ -28,7 +26,7 @@
         </div>
         <template v-if="Math.ceil(allStarships.count)">
             <Pagination
-                @selectPage="(i) => changePage(i)"
+                @selectPage="(i) => nextPage(i)"
                 :pages="Math.ceil(allStarships.count / 10)"
                 :activePage="page"
             />
@@ -41,8 +39,10 @@ import StarshipCard from '../components/StarshipCard.vue';
 import Pagination from '../components/Pagination.vue';
 import Loader from '../components/Loader.vue';
 
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { SearchStarships } from '../app.js';
+import { useRouter } from 'vue-router';
+
 export default {
     name: 'Search',
     components: {
@@ -54,9 +54,14 @@ export default {
         const starshipName = ref('');
         const allStarships = ref([]);
         const page = ref(1);
+        const router = useRouter();
         const loaderActive = ref(false);
-        const changePage = (selectPage) => {
+        const nextPage = (selectPage) => {
             page.value = selectPage;
+            searchStrashipByName();
+        };
+        const newSearch = () => {
+            page.value = 1;
             searchStrashipByName();
         };
         const searchStrashipByName = async () => {
@@ -66,14 +71,24 @@ export default {
                 page.value
             );
             loaderActive.value = false;
+            router.push({
+                query: { name: starshipName.value, page: page.value ?? 1 },
+            });
         };
+        onMounted(() => {
+            starshipName.value = router.currentRoute.value.query.name;
+            page.value = router.currentRoute.value.query.page;
 
+            searchStrashipByName();
+        });
         return {
             starshipName,
             allStarships,
             page,
             loaderActive,
-            changePage,
+            router,
+            newSearch,
+            nextPage,
             searchStrashipByName,
         };
     },
