@@ -1,5 +1,5 @@
 <template>
-    <router-link to="starships/9" class="card">
+    <router-link :to="{ path: `/starship/${id ?? -1}` }" class="card">
         <img
             v-if="!imageError"
             class="image"
@@ -25,8 +25,10 @@
 </template>
 <script>
 import { ref } from 'vue';
+
 export default {
     name: 'StarshipCard',
+
     props: {
         id: {
             type: String,
@@ -51,7 +53,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-    padding: 20px;
+    padding: clamp(10px, 1.04vw, 20px);
     display: flex;
     flex-direction: column;
     width: 100%;

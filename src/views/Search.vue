@@ -86,7 +86,6 @@ export default {
             allStarships,
             page,
             loaderActive,
-            router,
             newSearch,
             nextPage,
             searchStrashipByName,
@@ -117,7 +116,7 @@ export default {
     .emptiness-page {
         font-size: var(--size-second);
         color: var(--color-first);
-        margin-top: 50%;
+        margin-top: 10%;
         text-align: center;
     }
     .card-block {

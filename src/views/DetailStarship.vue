@@ -1,51 +1,72 @@
 <template>
-    <div class="detail">
-        <h1 class="title">Detail Starships</h1>
+    <div class="detail" v-if="!loaderActive">
+        <h1 class="title">{{ starship.name }}</h1>
         <div class="main-block">
             <img
+                v-if="!imageError"
                 class="image"
-                src="https://starwars-visualguide.com/assets/img/starships/9.jpg"
-                alt=""
+                :src="`https://starwars-visualguide.com/assets/img/starships/${router.params.id}.jpg`"
+                alt="Корабль"
+                @error="imageError = true"
+            />
+            <img
+                v-else
+                class="image"
+                src="https://static3.depositphotos.com/1007959/232/i/600/depositphotos_2328703-stock-photo-nothing-road-sign-with-dramatic.jpg"
+                alt="Корабль"
             />
             <div class="block-info">
                 <div class="text-block">
                     <span class="text-title">Model:</span>
-                    <h1 class="text-value">MYT-1300 light freighter</h1>
+                    <h1 class="text-value">{{ starship.model }}</h1>
                 </div>
                 <div class="text-block">
                     <span class="text-title">Name:</span>
-                    <h1 class="text-value">Millennium Falcon</h1>
+                    <h1 class="text-value">{{ starship.name }}</h1>
                 </div>
                 <div class="text-block">
                     <span class="text-title">Length:</span>
-                    <h1 class="text-value">34.37</h1>
+                    <h1 class="text-value">{{ starship.length }}</h1>
                 </div>
                 <div class="text-block">
                     <span class="text-title">Cost:</span>
-                    <h1 class="text-value">$30.000.000.000</h1>
+                    <h1 class="text-value">{{ starship.cost_in_credits }}</h1>
                 </div>
                 <div class="text-block">
                     <span class="text-title">Created:</span>
-                    <h1 class="text-value">10.12.2014</h1>
+                    <h1 class="text-value">{{ starship.created }}</h1>
                 </div>
             </div>
         </div>
         <h2 class="detail-text">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-            Nulla consequat massa quis enim. Lorem ipsum dolor sit amet,
-            consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-            montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
-            pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim
+            {{ starship.manufacturer }}
         </h2>
     </div>
+    <Loader v-if="loaderActive" />
 </template>
 <script>
+import { onMounted, ref } from '@vue/runtime-core';
+import { GetStarshipById } from '../app';
+import { useRoute } from 'vue-router';
+import Loader from '../components/Loader.vue';
+
 export default {
     name: 'DetailStarship',
+    components: {
+        Loader,
+    },
+    setup() {
+        const starship = ref({});
+        const router = useRoute();
+        const imageError = ref(false);
+        const loaderActive = ref(true);
+
+        onMounted(async () => {
+            starship.value = await GetStarshipById(router.params.id);
+            loaderActive.value = false;
+        });
+        return { starship, router, imageError, loaderActive };
+    },
 };
 </script>
 <style lang="scss" scoped>

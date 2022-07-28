@@ -17,7 +17,7 @@ const routes = [
         component: () => import('../views/Starships.vue'),
     },
     {
-        path: '/starships/:id',
+        path: '/starship/:id',
         name: 'detailstarship',
         component: () => import('../views/DetailStarship.vue'),
     },
