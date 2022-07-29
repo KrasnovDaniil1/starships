@@ -74,6 +74,7 @@ export default {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: clamp(30px, 3vw, 50px);
+        justify-content: center;
     }
 }
 @media screen and (max-width: 1360px) {
